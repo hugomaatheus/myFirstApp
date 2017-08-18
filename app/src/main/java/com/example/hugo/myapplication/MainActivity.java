@@ -1,14 +1,7 @@
 package com.example.hugo.myapplication;
-
-import android.icu.text.NumberFormat;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,12 +16,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View v) {
-        String message = "Total: " + quantity;
         int price = calculatePrice(quantity);
-        message = message + "\nValor: R$" + price;
-        message = message + "\nObrigado!";
-
-
+        String message = createOrderSummary(price);
         displayMessage(message);
     }
 
@@ -48,9 +37,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void displayMessage(String message) {
-        TextView messageTextView = (TextView) findViewById(R.id.price_textview);
+        TextView messageTextView = (TextView) findViewById(R.id.order_summary_text_view);
         messageTextView.setText(message);
     }
 
@@ -58,5 +46,14 @@ public class MainActivity extends AppCompatActivity {
     private int calculatePrice(int quantity) {
         int price = quantity * 5;
         return price;
+    }
+
+    private String createOrderSummary(int price) {
+        String priceMessage = "Nome: Hugo Matheus";
+        priceMessage = priceMessage + "\nQuantidade: " + quantity;
+        priceMessage = priceMessage + "\nTotal: R$" + price;
+        priceMessage = priceMessage + "\nObrigado!";
+
+        return priceMessage;
     }
 }
